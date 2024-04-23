@@ -1,0 +1,23 @@
+<app-header [title]="title"></app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-segment value="1" mode="md" (ionChange)="handleSegment($event)">
+      <ion-segment-button value="1">
+        <ion-label>Mis entrenamientos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    @if(loading){
+    <div class="spinner-container">
+      <ion-spinner name="dots"></ion-spinner>
+    </div>
+    } @if(!loading && trainings.length === 0 && flag === 1){
+    <div class="container-data">
+      <span>No tienes entrenamientos asignados</span>
+    </div>
+    } @if(!loading && trainings.length > 0 && flag === 1){
+    <app-user-trainings [trainings]="trainings"></app-user-trainings>
+    }
+  </div>
+</ion-content>

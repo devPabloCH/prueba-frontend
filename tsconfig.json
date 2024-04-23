@@ -8,9 +8,11 @@
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
-    "noImplicitReturns": true,
+    "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
+    "strictPropertyInitialization": false,
     "sourceMap": true,
+    "noImplicitAny": false,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
@@ -18,16 +20,14 @@
     "importHelpers": true,
     "target": "es2022",
     "module": "es2020",
-    "lib": [
-      "es2018", 
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "fullTemplateTypeCheck": true
   }
 }

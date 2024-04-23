@@ -1,0 +1,25 @@
+.add-btn {
+  padding: 2vh;
+}
+
+.pressed-btn {
+  --background: white;
+  color: var(--ion-color-primary);
+  border: 2px solid var(--ion-color-primary);
+  border-radius: 10px;
+}
+
+.evidence-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4vw;
+  ion-button {
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+  img {
+    width: 20vh;
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,35 @@
+span {
+  padding: 2vh;
+  font-size: 14px;
+}
+
+.container-component {
+  padding: 2vh;
+}
+
+ion-icon {
+  font-size: 25px;
+}
+
+ion-button {
+  background: var(--ion-color-primary);
+  color: white;
+  border-radius: 10px;
+  box-shadow: none !important;
+}
+
+.subitem {
+  border-radius: 10px;
+  border: 1px solid rgb(221, 221, 221);
+  margin-bottom: 2vh;
+}
+
+ion-item {
+  --background: transparent !important;
+}
+
+.container-title {
+  padding: 2vh;
+  width: 100%;
+  text-align: center;
+}

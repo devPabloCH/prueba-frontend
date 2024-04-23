@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: {
+    url: 'https://192.168.0.20/api-test/api/auth/',
+  },
 };
 
 /*

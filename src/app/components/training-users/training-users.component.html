@@ -1,0 +1,33 @@
+<div class="container-component">
+  <div class="container-title">
+    <span>Reportes del entrenamiento: {{ training.name }}</span>
+  </div>
+  @for (item of training['training_report']; track item){
+
+  <div class="subitem">
+    <ion-item mode="md" lines="none">
+      <ion-avatar>
+        <img
+          [src]="
+            item['user'].avatar
+              ? item['user'].avatar
+              : 'https://ionicframework.com/docs/img/demos/avatar.svg'
+          "
+        />
+      </ion-avatar>
+      <span> {{ item["user"].full_name }}</span>
+    </ion-item>
+    <ion-item mode="md" lines="none">
+      <span
+        >Distancia: {{ item.distance ? item.distance + " m" : "No definido" }}
+      </span></ion-item
+    >
+
+    <ion-item mode="md" lines="none">
+      <span
+        >Comentarios: {{ item.comments ? item.comments : "No definido" }}</span
+      >
+    </ion-item>
+  </div>
+  }
+</div>

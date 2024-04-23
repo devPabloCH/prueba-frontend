@@ -1,0 +1,89 @@
+<app-header [title]="title" [hasBackBtn]="true"></app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container" style="padding: 2vh">
+    <form [formGroup]="form">
+      <ion-item mode="md">
+        <ion-input
+          type="text"
+          autofocus="true"
+          labelPlacement="floating"
+          label="Nombre del entrenamiento"
+          formControlName="name"
+        ></ion-input>
+      </ion-item>
+      <ion-item mode="md" (click)="openPopoverEndDate()">
+        <ion-input
+          id="date"
+          labelPlacement="floating"
+          label="Fecha de inicio"
+          autofocus="true"
+          formControlName="start_time"
+          [value]="form.value.start_time | date: 'dd/MM/yyyy HH:mm'"
+          readonly
+        >
+        </ion-input>
+      </ion-item>
+      <ion-popover trigger="date" [isOpen]="isPopoverOpenEndDate">
+        <ng-template>
+          <ion-datetime
+            [(ngModel)]="start_time"
+            mode="md"
+            [min]="currentDate"
+            [ngModelOptions]="{standalone: true}"
+            (ionChange)="closePopoverEndDate()"
+            [showDefaultButtons]="true"
+            doneText="Aceptar"
+            cancelText="Cancelar"
+            [firstDayOfWeek]="1"
+          ></ion-datetime>
+        </ng-template>
+      </ion-popover>
+
+      <ion-item mode="md">
+        <ion-select
+          mode="ios"
+          labelPlacement="floating"
+          label="Recurrencia del entrenamiento"
+          placeholder="-"
+          formControlName="recurrence"
+        >
+          @for (item of recurrenceOptions; track item){
+          <ion-select-option [value]="item.value"
+            >{{item.label}}</ion-select-option
+          >
+          }
+        </ion-select>
+      </ion-item>
+    </form>
+    <ion-item mode="md">
+      <ion-select
+        mode="ios"
+        labelPlacement="floating"
+        [multiple]="true"
+        [(ngModel)]="runnersSelected"
+        label="Corredores"
+        placeholder="-"
+      >
+        @for (item of runners; track item){
+        <ion-select-option [value]="item.id"
+          >{{item.full_name}}</ion-select-option
+        >
+        }
+      </ion-select>
+    </ion-item>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" mode="md" [translucent]="true">
+  <ion-toolbar>
+    <ion-button
+      (click)="saveTraining()"
+      [disabled]="form.invalid || loading"
+      class="add-btn"
+      expand="block"
+    >
+      Guardar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

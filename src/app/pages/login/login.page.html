@@ -1,0 +1,53 @@
+<ion-content scrollY="false">
+  <div class="container">
+    <div class="form">
+      <form [formGroup]="form">
+        <ion-item mode="md">
+          <ion-input
+            label="Email"
+            autofocus="true"
+            labelPlacement="floating"
+            type="email"
+            formControlName="email"
+          ></ion-input>
+        </ion-item>
+        @if(form.get('email')!.errors && form.get('email')!.touched &&
+        form.get('email')!.hasError('required')){
+        <small class="error">Requerido</small>
+        }
+        <ion-item mode="md">
+          <ion-input
+            label="Contraseña"
+            autofocus="true"
+            labelPlacement="floating"
+            [type]="passwordVisible ? 'text' : 'password'"
+            formControlName="password"
+          ></ion-input>
+          <ion-button
+            fill="clear"
+            slot="end"
+            (click)="togglePasswordVisibility()"
+          >
+            <ion-icon [name]="passwordVisible ? 'eye-off' : 'eye'"></ion-icon>
+          </ion-button>
+        </ion-item>
+        @if(form.get('password')!.errors && form.get('password')!.touched &&
+        form.get('password')!.hasError('required')){
+        <small class="error">Requerido</small>
+        }
+      </form>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" mode="md" [translucent]="true">
+  <ion-toolbar>
+    <ion-button
+      (click)="login()"
+      [disabled]="!form.valid || loading"
+      expand="block"
+    >
+      Iniciar sesión
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

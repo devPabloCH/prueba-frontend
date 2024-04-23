@@ -1,0 +1,19 @@
+<div class="container-component">
+  @for (item of trainings; track item){
+  <ion-item-sliding>
+    <ion-item>
+      <span> {{ item["training"].name }} </span>
+      <span>{{ item["training"].start_time | date : "dd/MM/YY HH:mm" }} </span>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option
+        color="primary"
+        (click)="addReport(item, item.is_completed === 0 ? 'register' : 'view')"
+        ><ion-icon
+          [name]="item.is_completed === 0 ? 'create-outline' : 'eye-outline'"
+        ></ion-icon
+      ></ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+  }
+</div>

@@ -1,0 +1,85 @@
+<app-header [title]="title" [hasBackBtn]="true"></app-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="form">
+    <ion-item mode="md">
+      <ion-input
+        type="number"
+        autofocus="true"
+        labelPlacement="floating"
+        label="Distancia recorrida (metros) *"
+        formControlName="distance"
+        [readonly]="mode === 'view'"
+      ></ion-input>
+    </ion-item>
+    <ion-item mode="md">
+      <ion-textarea
+        type="text"
+        autofocus="true"
+        labelPlacement="floating"
+        label="Comentarios *"
+        formControlName="comments"
+        [readonly]="mode === 'view'"
+      ></ion-textarea>
+    </ion-item>
+
+    @if(mode === 'register'){
+    <ion-item mode="md">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <input
+              type="file"
+              (change)="addDocument($event)"
+              accept=".pdf"
+              style="display: none"
+              multiple="false"
+            />
+            <ion-button
+              [ngClass]="{'pressed-btn': this.selectedFile && !this.selectedImage}"
+              expand="block"
+              onclick="document.querySelector('input[type=file]').click()"
+            >
+              {{ this.selectedFile && !this.selectedImage ? 'Documento añadido'
+              : 'Añadir documento'}}
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button
+              expand="block"
+              [ngClass]="{'pressed-btn': !this.selectedFile && this.selectedImage}"
+              (click)="addImage()"
+            >
+              {{ !this.selectedFile && this.selectedImage ? 'Imagen añadida' :
+              'Añadir imagen'}}
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    }
+  </form>
+  <div class="evidence-container">
+    @if(mode === 'view' && ext === 'pdf'){
+    <ion-button expand="block" (click)="openDocument()">
+      Abrir documento de evidencia
+    </ion-button>
+    } @if(mode === 'view' && (ext === 'png' || ext === 'jpg' || ext ===
+    'jpeg')){
+    <img [src]="trainingReport.evidence" />
+    }
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" mode="md" [translucent]="true">
+  <ion-toolbar>
+    <ion-button
+      (click)="saveReport()"
+      [disabled]="form.invalid || mode === 'view'"
+      class="add-btn"
+      expand="block"
+    >
+      {{mode === 'view' ? 'Guardado' : 'Guardar'}}
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

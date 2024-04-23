@@ -1,0 +1,101 @@
+<app-header [title]="title" [hasBackBtn]="true"></app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container" style="padding: 2vh">
+    <div class="image">
+      <div (click)="takePicture()">
+        <ion-avatar>
+          <img
+            [src]="
+                avatar
+                  ? avatar
+                  : 'https://ionicframework.com/docs/img/demos/avatar.svg'
+              "
+            alt=""
+          />
+        </ion-avatar>
+      </div>
+    </div>
+    <form [formGroup]="form">
+      <ion-item mode="md">
+        <ion-input
+          type="text"
+          autofocus="true"
+          labelPlacement="floating"
+          label="Nombre completo"
+          formControlName="full_name"
+        ></ion-input>
+      </ion-item>
+      @if(form.get('full_name')!.errors && form.get('full_name')!.touched &&
+      form.get('full_name')!.hasError('required')){
+      <small class="error">Requerido</small>
+      }
+      <ion-item mode="md">
+        <ion-input
+          type="email"
+          autofocus="true"
+          labelPlacement="floating"
+          label="Email"
+          formControlName="email"
+        ></ion-input>
+      </ion-item>
+      @if(form.get('email')!.errors && form.get('email')!.touched &&
+      form.get('email')!.hasError('required')){
+      <small class="error">Requerido</small>
+      }
+      <ion-item mode="md">
+        <ion-input
+          label="Contraseña"
+          autofocus="true"
+          labelPlacement="floating"
+          [type]="passwordVisible ? 'text' : 'password'"
+          formControlName="password"
+        ></ion-input>
+        <ion-button
+          fill="clear"
+          slot="end"
+          (click)="togglePasswordVisibility()"
+        >
+          <ion-icon [name]="passwordVisible ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      @if(form.get('password')!.errors && form.get('password')!.touched &&
+      form.get('password')!.hasError('required')){
+      <small class="error">Requerido</small>
+      }
+      <ion-item mode="md">
+        <ion-input
+          label="Confirmar contraseña"
+          autofocus="true"
+          labelPlacement="floating"
+          [type]="passwordVisible ? 'text' : 'password'"
+          formControlName="password_confirmation"
+        ></ion-input>
+        <ion-button
+          fill="clear"
+          slot="end"
+          (click)="togglePasswordVisibility()"
+        >
+          <ion-icon [name]="passwordVisible ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      @if(form.get('password_confirmation')!.errors &&
+      form.get('password_confirmation')!.touched){
+      <small class="error">Debe coinicidir contraseña y su confirmación</small>
+      }
+    </form>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" mode="md" [translucent]="true">
+  <ion-toolbar>
+    <ion-button
+      (click)="saveRunner()"
+      [disabled]="form.invalid || loading"
+      class="add-btn"
+      expand="block"
+    >
+      Guardar
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

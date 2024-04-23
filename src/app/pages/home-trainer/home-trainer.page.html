@@ -1,0 +1,55 @@
+<app-header [title]="title"></app-header>
+
+<ion-content [fullscreen]="true">
+  <div class="container">
+    <ion-segment value="1" mode="md" (ionChange)="handleSegment($event)">
+      <ion-segment-button value="1">
+        <ion-label>Corredores</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="2">
+        <ion-label>Entrenamientos</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    @if(loading){
+    <div class="spinner-container">
+      <ion-spinner name="dots"></ion-spinner>
+    </div>
+    } @if(!loading){ @if(flag == 1){ @if(runners.length === 0 && !loading){
+    <div class="container-data">
+      <span>No hay corredores disponibles</span>
+    </div>
+    } @else {
+    <app-runners
+      [runners]="runners"
+      (userDeleted)="loadRunners()"
+    ></app-runners>
+    } } @if(flag == 2){ @if(trainings.length === 0 && !loading){
+    <div class="container-data">
+      <span>No hay entrenamientos disponibles</span>
+    </div>
+    } @else {
+    <app-trainings
+      [trainings]="trainings"
+      (trainingDeleted)="loadTrainings()"
+    ></app-trainings>
+    } } }
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border" mode="md" [translucent]="true">
+  <ion-toolbar>
+    <div class="chart-container">
+      <p-chart type="bar" [data]="data"></p-chart>
+    </div>
+    @if(flag == 2){
+    <ion-button (click)="goToTrainingForm()" expand="block">
+      Registrar entrenamiento
+    </ion-button>
+    } @if(flag == 1){
+    <ion-button (click)="goToRunnerForm()" expand="block">
+      Registrar corredor
+    </ion-button>
+    }
+  </ion-toolbar>
+</ion-footer>

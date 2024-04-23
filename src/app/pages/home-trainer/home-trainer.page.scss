@@ -1,0 +1,19 @@
+.container-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+ion-footer {
+  ion-toolbar {
+    .chart-container {
+      padding: 1vh;
+    }
+    ion-button {
+      padding-bottom: 2vh;
+      padding-left: 4vw;
+      padding-right: 4vw;
+    }
+  }
+}
