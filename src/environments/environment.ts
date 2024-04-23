@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api: {
-    url: 'https://192.168.0.20/api-test/api/auth/',
+    url: 'http://192.168.0.20/api-test/api/auth/',
   },
 };
 
